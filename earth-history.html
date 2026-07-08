@@ -737,11 +737,7 @@
     border-color: var(--accent);
     color: var(--accent-light);
   }
-  #lang-switch .lang-dot {
-    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent);
-    margin-right: 6px; vertical-align: middle; position: relative; top: -1px;
-  }
+  #lang-switch span { transition: all 0.25s ease; }
 
   /* ===== About Modal ===== */
   #about-btn {
@@ -875,8 +871,8 @@
   <button id="reset-view" title="重置视角" aria-label="重置地球视角">⟳</button>
 
   <!-- Language Switcher -->
-  <button id="lang-switch" title="Switch Language / 切换语言" aria-label="切换语言">
-    <span class="lang-dot"></span><span id="lang-label">EN</span>
+  <button id="lang-switch" title="切换语言 / Switch Language" aria-label="切换语言">
+    <span id="lang-zh" style="opacity:0.5">中</span><span style="opacity:0.3"> | </span><span id="lang-en" style="opacity:0.5">EN</span>
   </button>
 
   <!-- About Button -->
@@ -1078,7 +1074,13 @@
   // ============================================================
   //  I18N — Internationalization (must be before any t() calls)
   // ============================================================
-  let currentLang = 'zh';
+  // Auto-detect language: browser pref → localStorage → default zh
+  let currentLang = (() => {
+    const saved = localStorage.getItem('chronicle-lang');
+    if (saved === 'zh' || saved === 'en') return saved;
+    const browserLang = navigator.language || navigator.userLanguage || '';
+    return browserLang.startsWith('zh') ? 'zh' : 'en';
+  })();
   const i18n = {
     zh: {
       loading3D: '正在加载3D引擎...',
@@ -1193,7 +1195,10 @@
     document.getElementById('about-btn').title = t('aboutTitle_');
     // Update lang switch
     document.getElementById('lang-switch').title = t('langTitle');
-    document.getElementById('lang-label').textContent = currentLang === 'zh' ? 'EN' : '中';
+    document.getElementById('lang-zh').style.opacity = currentLang === 'zh' ? '1' : '0.4';
+    document.getElementById('lang-zh').style.fontWeight = currentLang === 'zh' ? '700' : '400';
+    document.getElementById('lang-en').style.opacity = currentLang === 'en' ? '1' : '0.4';
+    document.getElementById('lang-en').style.fontWeight = currentLang === 'en' ? '700' : '400';
     // Update keyboard hints
     const kbHints = document.getElementById('kb-hints');
     if (kbHints) {
@@ -3692,14 +3697,20 @@
   // ===== Language Switcher =====
   document.getElementById('lang-switch').addEventListener('click', () => {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('chronicle-lang', currentLang);
     updateAllUIText();
-    // Refresh current era display
     setCurrentEra(currentEraIndex);
-    // Refresh detail panel if open
     if (selectedMarker && detailPanel.classList.contains('open')) {
       openDetailPanel(selectedMarker);
     }
   });
+  // Set initial button state to match detected language
+  (function initLangButton() {
+    document.getElementById('lang-zh').style.opacity = currentLang === 'zh' ? '1' : '0.4';
+    document.getElementById('lang-zh').style.fontWeight = currentLang === 'zh' ? '700' : '400';
+    document.getElementById('lang-en').style.opacity = currentLang === 'en' ? '1' : '0.4';
+    document.getElementById('lang-en').style.fontWeight = currentLang === 'en' ? '700' : '400';
+  })();
 
   // ===== Auto-hide Hint Panel =====
   let hintHidden = false;
@@ -3724,6 +3735,9 @@
       currentEraIndex = eraFromHash;
     }
   }
+
+  // ===== Apply language on startup =====
+  updateAllUIText();
 
   // ============================================================
   //  INIT
