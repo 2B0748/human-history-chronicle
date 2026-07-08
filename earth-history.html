@@ -1739,6 +1739,36 @@
     });
   })();
 
+  // ============================================================
+  //  Auto-assign downloaded portrait images to people entries
+  // ============================================================
+  (function autoAssignPortraits() {
+    const portraitMap = {
+      "埃扎纳国王": "images/people/king_ezana.png",
+      "吉尔伽美什": "images/people/gilgamesh.png",
+      "亚历山大大帝": "images/people/alexander_great.png",
+      "费萨尔国王": "images/people/king_faisal.png",
+      "狄更斯": "images/people/charles_dickens.png",
+      "圣路易": "images/people/saint_louis.png",
+      "拜伦勋爵": "images/people/lord_byron.png",
+      "阿尔弗雷德大帝": "images/people/alfred_great.png",
+      "奥尔梅克统治者": "images/people/olmec_ruler.png",
+      "紫式部": "images/people/muraski.png",
+      "莫扎特": "images/people/mozart.png",
+      "海明威": "images/people/hemingway.png",
+    };
+    Object.keys(locationPeople).forEach(locName => {
+      const eraPeople = locationPeople[locName];
+      Object.keys(eraPeople).forEach(eraIdx => {
+        eraPeople[eraIdx].forEach(person => {
+          if (!person.img && portraitMap[person.name]) {
+            person.img = portraitMap[person.name];
+          }
+        });
+      });
+    });
+  })();
+
   // Helper: get people for a specific era (with fallback to nearest era)
   function getEraPeople(locationName, eraIndex) {
     const eraPeople = locationPeople[locationName];
