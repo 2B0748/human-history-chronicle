@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>历史人物长卷 · 改变世界的面孔</title>
+<style>
+  :root {
+    --color-bg: #0c0c0e;
+    --color-bg-secondary: #131316;
+    --color-bg-card: #1a1a1e;
+    --color-gold: #c9a227;
+    --color-gold-light: #e0c060;
+    --color-gold-dark: #8b6f1d;
+    --color-amber: #d4a574;
+    --color-copper: #b87333;
+    --color-silver: #a8b0c0;
+    --color-steel: #7a8a9a;
+    --color-emerald: #2a9d6e;
+    --color-ruby: #c0392b;
+    --color-sapphire: #2980b9;
+    --color-obsidian: #2c3e50;
+    --color-text: #e8e0d4;
+    --color-text-secondary: #a89e8e;
+    --color-text-muted: #6b6358;
+    --color-border: rgba(201, 162, 39, 0.15);
+    --color-border-strong: rgba(201, 162, 39, 0.35);
+    --font-serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    --shadow-glow: 0 0 30px rgba(201, 162, 39, 0.12);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); color: var(--color-text); background: var(--color-bg); line-height: 1.8; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  body::before { content: ''; position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse at 20% 0%, rgba(201,162,39,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 100%, rgba(184,115,51,0.05) 0%, transparent 50%), var(--color-bg); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding: 4rem 1.5rem; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, rgba(201,162,39,0.08) 0%, transparent 60%), radial-gradient(circle at 30% 70%, rgba(184,115,51,0.04) 0%, transparent 50%); pointer-events: none; }
+  .hero-stars { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4), transparent), radial-gradient(1px 1px at 25% 45%, rgba(255,255,255,0.3), transparent), radial-gradient(1px 1px at 60% 15%, rgba(255,255,255,0.5), transparent), radial-gradient(1px 1px at 80% 35%, rgba(255,255,255,0.3), transparent), radial-gradient(1px 1px at 45% 80%, rgba(255,255,255,0.4), transparent), radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.2), transparent), radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.3), transparent), radial-gradient(1px 1px at 15% 65%, rgba(255,255,255,0.25), transparent); animation: twinkle 4s ease-in-out infinite alternate; }
+  @keyframes twinkle { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+  .hero-content { position: relative; z-index: 2; max-width: 760px; }
+  .hero-eyebrow { font-size: 0.875rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 1.5rem; font-weight: 500; animation: fadeInDown 1s ease-out; }
+  .hero h1 { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-amber) 50%, var(--color-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeInUp 1s ease-out 0.2s backwards; }
+  .hero-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--color-text-secondary); line-height: 1.8; margin-bottom: 2.5rem; animation: fadeInUp 1s ease-out 0.4s backwards; }
+  .hero-stats { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; animation: fadeInUp 1s ease-out 0.6s backwards; }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--color-gold-light); }
+  .hero-stat-label { font-size: 0.8125rem; color: var(--color-text-muted); letter-spacing: 0.1em; margin-top: 0.25rem; }
+  .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: var(--color-text-muted); font-size: 0.8125rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; animation: bounce 2s ease-in-out infinite; }
+  .hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--color-gold), transparent); }
+  @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  .timeline-nav { position: sticky; top: 0; z-index: 100; background: rgba(12,12,14,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--color-border); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .timeline-nav::-webkit-scrollbar { display: none; }
+  .timeline-nav-inner { display: flex; gap: 0; padding: 0 1rem; min-width: max-content; align-items: center; }
+  .timeline-nav a { display: inline-block; padding: 0.875rem 1.25rem; font-size: 0.8125rem; font-weight: 500; color: var(--color-text-muted); border-bottom: 2px solid transparent; transition: all 0.25s ease; cursor: pointer; flex-shrink: 0; }
+  .timeline-nav a:hover { color: var(--color-gold-light); border-bottom-color: var(--color-gold-dark); }
+  .timeline-nav a.active { color: var(--color-gold); border-bottom-color: var(--color-gold); }
+  .timeline-nav-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--color-border-strong); flex-shrink: 0; }
+  .era { padding: 6rem 0 4rem; position: relative; }
+  .era-header { text-align: center; margin-bottom: 4rem; }
+  .era-period { display: inline-block; padding: 0.3rem 1rem; background: rgba(201,162,39,0.08); border: 1px solid var(--color-border); border-radius: 9999px; font-size: 0.8125rem; color: var(--color-gold); letter-spacing: 0.1em; margin-bottom: 1.25rem; }
+  .era-title { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--color-text); margin-bottom: 1rem; letter-spacing: 0.02em; }
+  .era-desc { font-size: 1.0625rem; color: var(--color-text-secondary); max-width: 640px; margin: 0 auto; line-height: 1.8; }
+  .person-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; margin-top: 2rem; }
+  .person-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 0.75rem; padding: 2rem; position: relative; overflow: hidden; opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+  .person-card.visible { opacity: 1; transform: translateY(0); }
+  .person-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; opacity: 0; transition: opacity 0.3s ease; }
+  .person-card:hover { border-color: var(--color-border-strong); box-shadow: var(--shadow-glow), var(--shadow-card); transform: translateY(-4px); }
+  .person-card:hover::before { opacity: 1; }
+  .person-card[data-cat="philosopher"]::before { background: linear-gradient(90deg, transparent, var(--color-sapphire), transparent); }
+  .person-card[data-cat="philosopher"]:hover { border-color: rgba(41,128,185,0.4); box-shadow: 0 0 30px rgba(41,128,185,0.12), var(--shadow-card); }
+  .person-card[data-cat="ruler"]::before { background: linear-gradient(90deg, transparent, var(--color-ruby), transparent); }
+  .person-card[data-cat="ruler"]:hover { border-color: rgba(192,57,43,0.4); box-shadow: 0 0 30px rgba(192,57,43,0.12), var(--shadow-card); }
+  .person-card[data-cat="scientist"]::before { background: linear-gradient(90deg, transparent, var(--color-emerald), transparent); }
+  .person-card[data-cat="scientist"]:hover { border-color: rgba(42,157,110,0.4); box-shadow: 0 0 30px rgba(42,157,110,0.12), var(--shadow-card); }
+  .person-card[data-cat="artist"]::before { background: linear-gradient(90deg, transparent, var(--color-amber), transparent); }
+  .person-card[data-cat="artist"]:hover { border-color: rgba(212,165,116,0.4); box-shadow: 0 0 30px rgba(212,165,116,0.12), var(--shadow-card); }
+  .person-card[data-cat="explorer"]::before { background: linear-gradient(90deg, transparent, var(--color-steel), transparent); }
+  .person-card[data-cat="explorer"]:hover { border-color: rgba(122,138,154,0.4); box-shadow: 0 0 30px rgba(122,138,154,0.12), var(--shadow-card); }
+  .person-card[data-cat="revolutionary"]::before { background: linear-gradient(90deg, transparent, var(--color-copper), transparent); }
+  .person-card[data-cat="revolutionary"]:hover { border-color: rgba(184,115,51,0.4); box-shadow: 0 0 30px rgba(184,115,51,0.12), var(--shadow-card); }
+  .person-card[data-cat="religious"]::before { background: linear-gradient(90deg, transparent, var(--color-gold), transparent); }
+  .person-card[data-cat="religious"]:hover { border-color: rgba(201,162,39,0.4); box-shadow: 0 0 30px rgba(201,162,39,0.12), var(--shadow-card); }
+  .person-card[data-cat="inventor"]::before { background: linear-gradient(90deg, transparent, var(--color-silver), transparent); }
+  .person-card[data-cat="inventor"]:hover { border-color: rgba(168,176,192,0.4); box-shadow: 0 0 30px rgba(168,176,192,0.12), var(--shadow-card); }
+  .person-card[data-cat="writer"]::before { background: linear-gradient(90deg, transparent, var(--color-obsidian), transparent); }
+  .person-card[data-cat="writer"]:hover { border-color: rgba(44,62,80,0.5); box-shadow: 0 0 30px rgba(44,62,80,0.15), var(--shadow-card); }
+  .person-card[data-cat="leader"]::before { background: linear-gradient(90deg, transparent, var(--color-gold), transparent); }
+  .person-header { display: flex; align-items: flex-start; gap: 1.25rem; margin-bottom: 1rem; }
+  .person-avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; flex-shrink: 0; border: 2px solid var(--color-border); transition: all 0.3s ease; }
+  .person-card:hover .person-avatar { border-color: var(--color-border-strong); transform: scale(1.08); }
+  .person-avatar[data-cat="philosopher"] { background: rgba(41,128,185,0.12); }
+  .person-avatar[data-cat="ruler"] { background: rgba(192,57,43,0.12); }
+  .person-avatar[data-cat="scientist"] { background: rgba(42,157,110,0.12); }
+  .person-avatar[data-cat="artist"] { background: rgba(212,165,116,0.12); }
+  .person-avatar[data-cat="explorer"] { background: rgba(122,138,154,0.12); }
+  .person-avatar[data-cat="revolutionary"] { background: rgba(184,115,51,0.12); }
+  .person-avatar[data-cat="religious"] { background: rgba(201,162,39,0.12); }
+  .person-avatar[data-cat="inventor"] { background: rgba(168,176,192,0.12); }
+  .person-avatar[data-cat="writer"] { background: rgba(44,62,80,0.15); }
+  .person-avatar[data-cat="leader"] { background: rgba(201,162,39,0.12); }
+  .person-name-wrap { flex: 1; }
+  .person-name { font-family: var(--font-serif); font-size: 1.375rem; font-weight: 700; color: var(--color-text); line-height: 1.3; margin-bottom: 0.25rem; }
+  .person-title { font-size: 0.8125rem; color: var(--color-gold); font-weight: 600; letter-spacing: 0.05em; }
+  .person-years { font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.15rem; }
+  .person-origin { font-size: 0.75rem; color: var(--color-text-secondary); margin-top: 0.1rem; }
+  .person-body { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.8; margin-bottom: 0.75rem; }
+  .person-quote { font-family: var(--font-serif); font-size: 0.9375rem; color: var(--color-amber); line-height: 1.7; margin-bottom: 0.75rem; padding: 0.75rem 1rem; background: rgba(212,165,116,0.06); border-left: 2px solid var(--color-amber); border-radius: 0 0.375rem 0.375rem 0; font-style: italic; }
+  .person-impact { font-size: 0.875rem; color: var(--color-text-muted); margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border); }
+  .person-impact strong { color: var(--color-gold-light); }
+  .person-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .person-tag { padding: 0.2rem 0.625rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; background: rgba(201,162,39,0.08); color: var(--color-gold-light); border: 1px solid var(--color-border); }
+  .person-tag[data-cat="philosopher"] { background: rgba(41,128,185,0.08); color: rgba(41,128,185,0.85); border-color: rgba(41,128,185,0.2); }
+  .person-tag[data-cat="ruler"] { background: rgba(192,57,43,0.08); color: rgba(192,57,43,0.85); border-color: rgba(192,57,43,0.2); }
+  .person-tag[data-cat="scientist"] { background: rgba(42,157,110,0.08); color: rgba(42,157,110,0.85); border-color: rgba(42,157,110,0.2); }
+  .person-tag[data-cat="artist"] { background: rgba(212,165,116,0.08); color: rgba(212,165,116,0.85); border-color: rgba(212,165,116,0.2); }
+  .person-tag[data-cat="explorer"] { background: rgba(122,138,154,0.08); color: rgba(122,138,154,0.85); border-color: rgba(122,138,154,0.2); }
+  .person-tag[data-cat="revolutionary"] { background: rgba(184,115,51,0.08); color: rgba(184,115,51,0.85); border-color: rgba(184,115,51,0.2); }
+  .person-tag[data-cat="religious"] { background: rgba(201,162,39,0.08); color: var(--color-gold-light); border-color: rgba(201,162,39,0.2); }
+  .person-tag[data-cat="inventor"] { background: rgba(168,176,192,0.08); color: rgba(168,176,192,0.85); border-color: rgba(168,176,192,0.2); }
+  .person-tag[data-cat="writer"] { background: rgba(44,62,80,0.1); color: rgba(44,62,80,0.85); border-color: rgba(44,62,80,0.25); }
+  .person-tag[data-cat="leader"] { background: rgba(201,162,39,0.08); color: var(--color-gold-light); border-color: rgba(201,162,39,0.2); }
+  .era-divider { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 4rem 0; }
+  .era-divider-line { flex: 1; max-width: 200px; height: 1px; background: linear-gradient(90deg, transparent, var(--color-gold-dark)); }
+  .era-divider-line.right { background: linear-gradient(90deg, var(--color-gold-dark), transparent); }
+  .era-divider-symbol { color: var(--color-gold-dark); font-size: 1.25rem; }
+  .quote-block { max-width: 760px; margin: 3rem auto; text-align: center; padding: 2rem; position: relative; }
+  .quote-block::before, .quote-block::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--color-gold-dark), transparent); }
+  .quote-block::before { top: 0; }
+  .quote-block::after { bottom: 0; }
+  .quote-text { font-family: var(--font-serif); font-size: 1.25rem; font-style: italic; color: var(--color-amber); line-height: 1.8; margin-bottom: 1rem; }
+  .quote-author { font-size: 0.875rem; color: var(--color-text-muted); letter-spacing: 0.1em; }
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin: 3rem 0; }
+  .stat-box { text-align: center; padding: 1.5rem; background: rgba(201,162,39,0.03); border: 1px solid var(--color-border); border-radius: 0.5rem; }
+  .stat-num { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--color-gold-light); margin-bottom: 0.25rem; }
+  .stat-label { font-size: 0.8125rem; color: var(--color-text-muted); }
+  .footer { background: var(--color-bg-secondary); border-top: 1px solid var(--color-border); padding: 4rem 1.5rem 2rem; text-align: center; }
+  .footer-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-gold-light); margin-bottom: 1rem; }
+  .footer-text { font-size: 0.9375rem; color: var(--color-text-secondary); max-width: 540px; margin: 0 auto 2rem; line-height: 1.8; }
+  .footer-quote { font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: var(--color-amber); margin-bottom: 2rem; }
+  .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--color-border); font-size: 0.8125rem; color: var(--color-text-muted); }
+  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--color-gold), var(--color-amber)); z-index: 200; transition: width 0.1s ease; box-shadow: 0 0 10px rgba(201,162,39,0.5); }
+  @media (max-width: 768px) { .person-grid { grid-template-columns: 1fr; } .hero-stats { gap: 1.5rem; } .hero-stat-num { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+
+  <section class="hero">
+    <div class="hero-stars"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Faces That Changed the World</div>
+      <h1>历史人物长卷</h1>
+      <p class="hero-subtitle">从轴心时代的哲人，到硅谷的创业家——<br>每一张面孔背后，都是一段改变人类命运的故事。</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">50+</div><div class="hero-stat-label">关键历史人物</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">10</div><div class="hero-stat-label">大历史时代</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">9</div><div class="hero-stat-label">人物类型</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">∞</div><div class="hero-stat-label">影响延续至今</div></div>
+      </div>
+    </div>
+    <div class="hero-scroll"><span>向下滚动，遇见改变世界的人</span><div class="hero-scroll-line"></div></div>
+  </section>
+
+  <nav class="timeline-nav" id="timelineNav">
+    <div class="timeline-nav-inner">
+      <a href="#era1" class="active">远古先贤</a><div class="timeline-nav-dot"></div>
+      <a href="#era2">古典巨匠</a><div class="timeline-nav-dot"></div>
+      <a href="#era3">中世纪风云</a><div class="timeline-nav-dot"></div>
+      <a href="#era4">文艺复兴</a><div class="timeline-nav-dot"></div>
+      <a href="#era5">启蒙革命</a><div class="timeline-nav-dot"></div>
+      <a href="#era6">工业时代</a><div class="timeline-nav-dot"></div>
+      <a href="#era7">世界大战</a><div class="timeline-nav-dot"></div>
+      <a href="#era8">冷战人物</a><div class="timeline-nav-dot"></div>
+      <a href="#era9">当代先锋</a>
+    </div>
+  </nav>
+
+  <!-- Era 1: 远古先贤 -->
+  <section class="era" id="era1">
+    <div class="container">
+      <div class="era-header">
+        <div class="era-period">约公元前 700 年 — 公元前 300 年</div>
+        <h2 class="era-title">远古先贤 · 轴心时代的思想家</h2>
+        <p class="era-desc">人类精神的黎明。在东方与西方几乎同时，一批伟大的思想家横空出世，他们奠定了此后数千年文明的根基——被称为"轴心时代"。</p>
+      </div>
+      <div class="person-grid">
+        <div class="person-card" data-cat="philosopher">
+          <div class="person-header"><div class="person-avatar" data-cat="philosopher">📜</div><div class="person-name-wrap"><div class="person-name">孔子</div><div class="person-title">万世师表 · 儒家创始人</div><div class="person-years">公元前 551 — 479 年</div><div class="person-origin">中国 · 鲁国（今山东曲阜）</div></div></div>
+          <p class="person-body">春秋末期思想家、教育家，开创儒家学说。倡导"仁"与"礼"，主张以道德教化治国。编订六经，弟子三千，贤者七十二。儒家思想成为中国两千年的国家意识形态，影响遍及东亚。</p>
+          <div class="person-quote">"己所不欲，勿施于人。"</div>
+          <div class="person-impact"><strong>影响：</strong>儒家思想塑造了中国、日本、韩国的社会伦理和政治秩序，至今影响超过15亿人。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="philosopher">哲学</span><span class="person-tag" data-cat="philosopher">教育</span><span class="person-tag" data-cat="philosopher">儒家</span></div>
+        </div>
+        <div class="person-card" data-cat="philosopher">
+          <div class="person-header"><div class="person-avatar" data-cat="philosopher">🧘</div><div class="person-name-wrap"><div class="person-name">释迦牟尼</div><div class="person-title">觉悟者 · 佛教创始人</div><div class="person-years">约公元前 563 — 483 年</div><div class="person-origin">古印度 ·迦毗罗卫国（今尼泊尔）</div></div></div>
+          <p class="person-body">原名悉达多·乔达摩，迦毗罗卫国王子。29岁弃王位出家，在菩提树下悟道成佛。提出"四谛"和"八正道"，主张通过修行消除痛苦。佛教传遍亚洲，成为世界性宗教。</p>
+          <div class="person-quote">"诸恶莫作，众善奉行，自净其意，是诸佛教。"</div>
+          <div class="person-impact"><strong>影响：</strong>佛教影响超过5亿信徒，禅宗思想影响了现代心理学和冥想运动。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="philosopher">宗教</span><span class="person-tag" data-cat="philosopher">佛教</span><span class="person-tag" data-cat="philosopher">修行</span></div>
+        </div>
+        <div class="person-card" data-cat="philosopher">
+          <div class="person-header"><div class="person-avatar" data-cat="philosopher">💭</div><div class="person-name-wrap"><div class="person-name">苏格拉底</div><div class="person-title">西方哲学之父</div><div class="person-years">公元前 469 — 399 年</div><div class="person-origin">古希腊 · 雅典</div></div></div>
+          <p class="person-body">雅典街头哲学家，不著一字，仅以对话探寻真理。发明"苏格拉底式诘问法"。被雅典法庭判处死刑，饮鸩而亡。他的死成为西方思想自由的永恒象征。</p>
+          <div class="person-quote">"未经审视的人生不值得过。"</div>
+          <div class="person-impact"><strong>影响：</strong>柏拉图和亚里士多德皆为其弟子或再传弟子，西方哲学从此开始。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="philosopher">哲学</span><span class="person-tag" data-cat="philosopher">辩证</span><span class="person-tag" data-cat="philosopher">雅典</span></div>
+        </div>
+        <div class="person-card" data-cat="philosopher">
+          <div class="person-header"><div class="person-avatar" data-cat="philosopher">🌿</div><div class="person-name-wrap"><div class="person-name">老子</div><div class="person-title">道家始祖 · 《道德经》作者</div><div class="person-years">约公元前 571 — ？年</div><div class="person-origin">中国 · 楚国（今河南鹿邑）</div></div></div>
+          <p class="person-body">著《道德经》五千言，提出"道"为宇宙根本法则，主张"无为而治"、"柔弱胜刚强"。道家思想与儒家互补，成为中国文化的阴阳两极。</p>
+          <div class="person-quote">"上善若水。水善利万物而不争。"</div>
+          <div class="person-impact"><strong>影响：</strong>《道德经》是除《圣经》外翻译版本最多的经典，道教影响中国艺术、医学和哲学。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="philosopher">道家</span><span class="person-tag" data-cat="philosopher">无为</span><span class="person-tag" data-cat="philosopher">自然</span></div>
+        </div>
+        <div class="person-card" data-cat="ruler">
+          <div class="person-header"><div class="person-avatar" data-cat="ruler">⚔️</div><div class="person-name-wrap"><div class="person-name">亚历山大大帝</div><div class="person-title">征服之王 · 希腊化时代开创者</div><div class="person-years">公元前 356 — 323 年</div><div class="person-origin">马其顿 · 佩拉</div></div></div>
+          <p class="person-body">20岁继承王位，13年内征服从希腊到印度河流域的广阔领土。推行文化融合政策，传播希腊文化。亚历山大城成为地中海学术中心。</p>
+          <div class="person-impact"><strong>影响：</strong>希腊化时代东西方文化深度交融，欧几里得在亚历山大城编写《几何原本》。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="ruler">征服</span><span class="person-tag" data-cat="ruler">希腊化</span><span class="person-tag" data-cat="ruler">军事</span></div>
+        </div>
+      </div>
+      <div class="quote-block"><p class="quote-text">"轴心时代的奇迹在于：中国、印度和西方这三个互不知晓的地区，几乎同时完成了精神的飞跃。"</p><p class="quote-author">—— 卡尔·雅斯贝尔斯</p></div>
+    </div>
+  </section>
+
+  <div class="era-divider"><div class="era-divider-line"></div><span class="era-divider-symbol">◆</span><div class="era-divider-line right"></div></div>
+
+  <!-- Era 2: 古典巨匠 -->
+  <section class="era" id="era2">
+    <div class="container">
+      <div class="era-header">
+        <div class="era-period">公元前 300 年 — 公元 500 年</div>
+        <h2 class="era-title">古典巨匠 · 帝国的缔造者与学者</h2>
+        <p class="era-desc">帝国横跨大陆，学者穷尽宇宙。这个时代见证了罗马的崛起、汉朝的辉煌，以及那些用法律、思想和工程塑造文明秩序的人。</p>
+      </div>
+      <div class="person-grid">
+        <div class="person-card" data-cat="ruler">
+          <div class="person-header"><div class="person-avatar" data-cat="ruler">🔥</div><div class="person-name-wrap"><div class="person-name">秦始皇</div><div class="person-title">千古一帝 · 中国首位统一者</div><div class="person-years">公元前 259 — 210 年</div><div class="person-origin">中国 · 秦国</div></div></div>
+          <p class="person-body">嬴政13岁继位，39岁灭六国统一中国。推行"书同文、车同轨"，统一文字度量衡；修万里长城；设郡县制。虽仅存15年，但其政治模式被此后两千年继承。</p>
+          <div class="person-impact"><strong>影响：</strong>中国统一国家概念从此根植，郡县制和标准化成为核心制度。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="ruler">统一</span><span class="person-tag" data-cat="ruler">制度</span><span class="person-tag" data-cat="ruler">长城</span></div>
+        </div>
+        <div class="person-card" data-cat="ruler">
+          <div class="person-header"><div class="person-avatar" data-cat="ruler">🏛️</div><div class="person-name-wrap"><div class="person-name">屋大维（奥古斯都）</div><div class="person-title">罗马帝国缔造者</div><div class="person-years">公元前 63 — 公元 14 年</div><div class="person-origin">罗马</div></div></div>
+          <p class="person-body">凯撒养子和继承人，击败安东尼后成为罗马唯一统治者。以"奥古斯都"称号开创罗马帝国和"罗马和平"。巧妙平衡共和与独裁，建立延续数百年的政治模式。</p>
+          <div class="person-impact"><strong>影响：</strong>罗马和平延续200年，罗马法、拉丁语、道路体系深刻影响欧洲文明。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="ruler">罗马</span><span class="person-tag" data-cat="ruler">帝国</span><span class="person-tag" data-cat="ruler">和平</span></div>
+        </div>
+        <div class="person-card" data-cat="philosopher">
+          <div class="person-header"><div class="person-avatar" data-cat="philosopher">📖</div><div class="person-name-wrap"><div class="person-name">亚里士多德</div><div class="person-title">百科全书式学者</div><div class="person-years">公元前 384 — 322 年</div><div class="person-origin">古希腊 · 斯塔吉拉</div></div></div>
+          <p class="person-body">柏拉图的学生、亚历山大的老师。系统研究逻辑学、物理学、生物学、伦理学、政治学——几乎涵盖所有知识领域。创立形式逻辑，被中世纪学者称为"第一位哲学家"。</p>
+          <div class="person-impact"><strong>影响：</strong>著作成为中世纪欧洲和伊斯兰世界的学术基础，逻辑学至今是哲学和计算机的核心工具。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="philosopher">逻辑</span><span class="person-tag" data-cat="philosopher">科学</span><span class="person-tag" data-cat="philosopher">百科</span></div>
+        </div>
+        <div class="person-card" data-cat="religious">
+          <div class="person-header"><div class="person-avatar" data-cat="religious">✝️</div><div class="person-name-wrap"><div class="person-name">耶稣</div><div class="person-title">基督教核心人物</div><div class="person-years">约公元前 4 — 约30/33年</div><div class="person-origin">犹地亚 · 伯利恒</div></div></div>
+          <p class="person-body">犹太教改革者，宣讲爱、宽恕和天国。被罗马当局钉十字架处死，但其追随者相信他复活，将教导传播至整个罗马帝国。基督教从受迫害小教派发展为世界最大宗教。</p>
+          <div class="person-quote">"你们要彼此相爱，如同我爱你们一样。"</div>
+          <div class="person-impact"><strong>影响：</strong>基督教拥有超过24亿信徒，塑造了西方的艺术、伦理、法律和政治思想。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="religious">基督教</span><span class="person-tag" data-cat="religious">伦理</span><span class="person-tag" data-cat="religious">救赎</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="era-divider"><div class="era-divider-line"></div><span class="era-divider-symbol">◆</span><div class="era-divider-line right"></div></div>
+
+  <!-- Era 3: 中世纪风云 -->
+  <section class="era" id="era3">
+    <div class="container">
+      <div class="era-header">
+        <div class="era-period">公元 500 — 1500 年</div>
+        <h2 class="era-title">中世纪风云 · 信仰与征服的时代</h2>
+        <p class="era-desc">穆罕默德创立伊斯兰教，成吉思汗横扫欧亚，唐宋文人书写东方盛世。不同文明各自绽放、又相互碰撞。</p>
+      </div>
+      <div class="person-grid">
+        <div class="person-card" data-cat="religious">
+          <div class="person-header"><div class="person-avatar" data-cat="religious">🕌</div><div class="person-name-wrap"><div class="person-name">穆罕默德</div><div class="person-title">伊斯兰教创始人</div><div class="person-years">公元 570 — 632 年</div><div class="person-origin">阿拉伯 · 麦加</div></div></div>
+          <p class="person-body">610年收到首次启示，622年从麦加迁徙麦地那（希吉拉），建立第一个伊斯兰社群。传述《古兰经》，统一阿拉伯半岛。百年内伊斯兰从沙漠信仰变为世界帝国。</p>
+          <div class="person-impact"><strong>影响：</strong>伊斯兰教拥有超过19亿信徒，伊斯兰黄金时代推动了数学和天文学。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="religious">伊斯兰</span><span class="person-tag" data-cat="religious">阿拉伯</span><span class="person-tag" data-cat="religious">古兰经</span></div>
+        </div>
+        <div class="person-card" data-cat="ruler">
+          <div class="person-header"><div class="person-avatar" data-cat="ruler">🏇</div><div class="person-name-wrap"><div class="person-name">成吉思汗</div><div class="person-title">草原霸主 · 世界最大帝国缔造者</div><div class="person-years">约 1162 — 1227 年</div><div class="person-origin">蒙古高原</div></div></div>
+          <p class="person-body">铁木真统一蒙古各部，1206年被推举为成吉思汗。蒙古帝国疆域从太平洋延伸到东欧，面积超过2400万平方公里。蒙古"和平"促进了丝绸之路贸易。</p>
+          <div class="person-impact"><strong>影响：</strong>蒙古帝国改变了欧亚政治格局，促进东西方首次大规模交流。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="ruler">征服</span><span class="person-tag" data-cat="ruler">蒙古</span><span class="person-tag" data-cat="ruler">帝国</span></div>
+        </div>
+        <div class="person-card" data-cat="writer">
+          <div class="person-header"><div class="person-avatar" data-cat="writer">✍️</div><div class="person-name-wrap"><div class="person-name">李白</div><div class="person-title">诗仙 · 中国浪漫主义巅峰</div><div class="person-years">公元 701 — 762 年</div><div class="person-origin">中国 · 绵州（今四川江油）</div></div></div>
+          <p class="person-body">盛唐最伟大的诗人，被誉为"诗仙"。一生嗜酒好游，其诗风格豪放飘逸，想象力惊人——"飞流直下三千尺"般的夸张与"举杯邀明月"般的浪漫，代表了唐诗最高成就。</p>
+          <div class="person-quote">"长风破浪会有时，直挂云帆济沧海。"</div>
+          <div class="person-impact"><strong>影响：</strong>唐诗是中国文学的高峰，李白与杜甫并称"李杜"，影响了此后所有中国诗人。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="writer">诗歌</span><span class="person-tag" data-cat="writer">唐朝</span><span class="person-tag" data-cat="writer">浪漫</span></div>
+        </div>
+        <div class="person-card" data-cat="ruler">
+          <div class="person-header"><div class="person-avatar" data-cat="ruler">👑</div><div class="person-name-wrap"><div class="person-name">查理曼大帝</div><div class="person-title">西欧秩序重塑者</div><div class="person-years">约 742 — 814 年</div><div class="person-origin">法兰克王国</div></div></div>
+          <p class="person-body">800年被教皇加冕为"罗马人的皇帝"。征服西欧大部分地区，推动加洛林文艺复兴——恢复拉丁文教育，修道院保存古典知识。奠定了法国、德国和意大利的基本版图。</p>
+          <div class="person-impact"><strong>影响：</strong>"欧洲之父"——帝国遗产定义了西欧民族国家版图。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="ruler">法兰克</span><span class="person-tag" data-cat="ruler">文艺复兴</span><span class="person-tag" data-cat="ruler">欧洲</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="era-divider"><div class="era-divider-line"></div><span class="era-divider-symbol">◆</span><div class="era-divider-line right"></div></div>
+
+  <!-- Era 4: 文艺复兴 -->
+  <section class="era" id="era4">
+    <div class="container">
+      <div class="era-header">
+        <div class="era-period">公元 1400 — 1700 年</div>
+        <h2 class="era-title">文艺复兴 · 人的觉醒</h2>
+        <p class="era-desc">人从神的阴影下走出来。艺术家发现人体之美，航海家发现新大陆，科学家发现宇宙真相，改革者发现信仰的个人性。</p>
+      </div>
+      <div class="person-grid">
+        <div class="person-card" data-cat="artist">
+          <div class="person-header"><div class="person-avatar" data-cat="artist">🎨</div><div class="person-name-wrap"><div class="person-name">达·芬奇</div><div class="person-title">全能天才 · 文艺复兴之巅</div><div class="person-years">1452 — 1519 年</div><div class="person-origin">意大利 · 芬奇镇</div></div></div>
+          <p class="person-body">最接近"全能天才"的人——画家、工程师、发明家、解剖学家。《蒙娜丽莎》和《最后的晚餐》定义了西方绘画的高度，手稿中包含直升机、坦克构想和精确人体解剖。</p>
+          <div class="person-quote">"学习永远不会使心灵疲倦。"</div>
+          <div class="person-impact"><strong>影响：</strong>证明了艺术与科学可以完美融合，其手稿成为工程学和解剖学的先驱。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="artist">艺术</span><span class="person-tag" data-cat="artist">科学</span><span class="person-tag" data-cat="artist">全能</span></div>
+        </div>
+        <div class="person-card" data-cat="artist">
+          <div class="person-header"><div class="person-avatar" data-cat="artist">🪨</div><div class="person-name-wrap"><div class="person-name">米开朗基罗</div><div class="person-title">雕塑之神 · 西斯廷穹顶画师</div><div class="person-years">1475 — 1564 年</div><div class="person-origin">意大利 · 卡普雷塞</div></div></div>
+          <p class="person-body">《大卫》展现了人体力量的极致——5米高的大理石少年。西斯廷穹顶《创世纪》耗时4年，仰面绘制300多个人物，是西方艺术史上最壮观的作品。</p>
+          <div class="person-impact"><strong>影响：</strong>定义了西方对"崇高"的审美标准，西斯廷穹顶每年600万游客朝圣。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="artist">雕塑</span><span class="person-tag" data-cat="artist">绘画</span><span class="person-tag" data-cat="artist">文艺复兴</span></div>
+        </div>
+        <div class="person-card" data-cat="explorer">
+          <div class="person-header"><div class="person-avatar" data-cat="explorer">🧭</div><div class="person-name-wrap"><div class="person-name">哥伦布</div><div class="person-title">大航海先驱 · 新大陆发现者</div><div class="person-years">1451 — 1506 年</div><div class="person-origin">意大利 · 热那亚</div></div></div>
+          <p class="person-body">1492年在西班牙资助下西航，意外发现美洲。开启"哥伦布大交换"——作物物种全球流通，但也带来天花导致美洲原住民锐减90%。他至死相信自己到达了亚洲。</p>
+          <div class="person-impact"><strong>影响：</strong>他的航行彻底改变了世界格局——从此全球连为一体。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="explorer">航海</span><span class="person-tag" data-cat="explorer">发现</span><span class="person-tag" data-cat="explorer">美洲</span></div>
+        </div>
+        <div class="person-card" data-cat="religious">
+          <div class="person-header"><div class="person-avatar" data-cat="religious">📜</div><div class="person-name-wrap"><div class="person-name">马丁·路德</div><div class="person-title">宗教改革先驱</div><div class="person-years">1483 — 1546 年</div><div class="person-origin">德意志 · 艾斯莱本</div></div></div>
+          <p class="person-body">1517年钉下《九十五条论纲》，主张"因信称义"——信徒无需教会中介即可与神直接沟通。印刷术使他的著作几周内传遍德意志，基督教分裂为天主教和新教。</p>
+          <div class="person-impact"><strong>影响：</strong>宗教改革瓦解了教会统一权威，催生了近代民族国家。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="religious">宗教改革</span><span class="person-tag" data-cat="religious">新教</span><span class="person-tag" data-cat="religious">德语</span></div>
+        </div>
+        <div class="person-card" data-cat="scientist">
+          <div class="person-header"><div class="person-avatar" data-cat="scientist">🔭</div><div class="person-name-wrap"><div class="person-name">伽利略</div><div class="person-title">现代科学之父</div><div class="person-years">1564 — 1642 年</div><div class="person-origin">意大利 · 佛罗伦萨</div></div></div>
+          <p class="person-body">用望远镜发现木星卫星、太阳黑点，用实证推翻亚里士多德宇宙观。主张数学和实验而非权威认识自然——现代科学方法的核心。1633年被教会强迫悔过，软禁至死。</p>
+          <div class="person-quote">"自然界的伟大之门是以数学语言写成的。"</div>
+          <div class="person-impact"><strong>影响：</strong>实证主义方法奠定了现代科学基础，350年后教会承认审判错误。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="scientist">天文</span><span class="person-tag" data-cat="scientist">实验</span><span class="person-tag" data-cat="scientist">物理</span></div>
+        </div>
+        <div class="person-card" data-cat="scientist">
+          <div class="person-header"><div class="person-avatar" data-cat="scientist">🍎</div><div class="person-name-wrap"><div class="person-name">牛顿</div><div class="person-title">科学革命巅峰 · 经典力学奠基人</div><div class="person-years">1643 — 1727 年</div><div class="person-origin">英格兰 · 乌尔斯索普</div></div></div>
+          <p class="person-body">1687年发表《自然哲学的数学原理》，用万有引力定律和三大运动定律统一天上地下——首次用一个理论解释整个物理世界。还发明了微积分、分解了白光。</p>
+          <div class="person-quote">"如果我看得更远，那是因为我站在巨人的肩膀上。"</div>
+          <div class="person-impact"><strong>影响：</strong>经典力学统治物理学200年，微积分成为数学和工程的基础工具。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="scientist">力学</span><span class="person-tag" data-cat="scientist">微积分</span><span class="person-tag" data-cat="scientist">万有引力</span></div>
+        </div>
+      </div>
+      <div class="quote-block"><p class="quote-text">"人不能像野兽一样活着，应当追求美德和知识。"</p><p class="quote-author">—— 达·芬奇</p></div>
+    </div>
+  </section>
+
+  <div class="era-divider"><div class="era-divider-line"></div><span class="era-divider-symbol">◆</span><div class="era-divider-line right"></div></div>
+
+  <!-- Era 5: 启蒙革命 -->
+  <section class="era" id="era5">
+    <div class="container">
+      <div class="era-header">
+        <div class="era-period">公元 1700 — 1850 年</div>
+        <h2 class="era-title">启蒙革命 · 理性之光</h2>
+        <p class="era-desc">思想家用笔锋撼动旧秩序，革命者用鲜血重塑新世界。自由、平等、法治——这些今天视为常识的观念，在当时是革命的口号。</p>
+      </div>
+      <div class="person-grid">
+        <div class="person-card" data-cat="philosopher">
+          <div class="person-header"><div class="person-avatar" data-cat="philosopher">💡</div><div class="person-name-wrap"><div class="person-name">伏尔泰</div><div class="person-title">启蒙运动旗手</div><div class="person-years">1694 — 1778 年</div><div class="person-origin">法国 · 巴黎</div></div></div>
+          <p class="person-body">以笔为剑对抗专制和教权，提倡理性、宽容和言论自由。著作以讽刺和机智著称，《哲学通信》将英国自由思想传入法国。被流放多次，但从未停止战斗。</p>
+          <div class="person-quote">"我不赞同你的观点，但我誓死捍卫你表达观点的权利。"</div>
+          <div class="person-impact"><strong>影响：</strong>法国大革命的思想先驱，"伏尔泰"成为理性与自由的代名词。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="philosopher">启蒙</span><span class="person-tag" data-cat="philosopher">自由</span><span class="person-tag" data-cat="philosopher">讽刺</span></div>
+        </div>
+        <div class="person-card" data-cat="philosopher">
+          <div class="person-header"><div class="person-avatar" data-cat="philosopher">🤝</div><div class="person-name-wrap"><div class="person-name">卢梭</div><div class="person-title">社会契约论者 · 人民主权倡导者</div><div class="person-years">1712 — 1778 年</div><div class="person-origin">日内瓦</div></div></div>
+          <p class="person-body">提出"社会契约论"——国家权力来自人民公意，而非神授或世袭。揭示私有制是社会不平等的根源。他既是启蒙思想家又批判启蒙本身——认为文明使人堕落。</p>
+          <div class="person-quote">"人生而自由，却无处不在枷锁之中。"</div>
+          <div class="person-impact"><strong>影响：</strong>人民主权思想成为现代民主制度的理论基石。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="philosopher">民主</span><span class="person-tag" data-cat="philosopher">契约</span><span class="person-tag" data-cat="philosopher">平等</span></div>
+        </div>
+        <div class="person-card" data-cat="ruler">
+          <div class="person-header"><div class="person-avatar" data-cat="ruler">⚡</div><div class="person-name-wrap"><div class="person-name">拿破仑</div><div class="person-title">革命帝国 · 法典缔造者</div><div class="person-years">1769 — 1821 年</div><div class="person-origin">法国 · 科西嘉岛</div></div></div>
+          <p class="person-body">从炮兵军官到法国皇帝。比军事征服更重要的是《拿破仑法典》——法律面前人人平等、私有财产不可侵犯、政教分离。重建法国教育体系，推行行政标准化。最终在滑铁卢战败。</p>
+          <div class="person-impact"><strong>影响：</strong>《拿破仑法典》成为全球数十个国家民法的基础，征服将革命理念传播到整个欧洲。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="ruler">军事</span><span class="person-tag" data-cat="ruler">法典</span><span class="person-tag" data-cat="ruler">革命</span></div>
+        </div>
+        <div class="person-card" data-cat="revolutionary">
+          <div class="person-header"><div class="person-avatar" data-cat="revolutionary">✊</div><div class="person-name-wrap"><div class="person-name">华盛顿</div><div class="person-title">美国国父 · 共和制度奠基人</div><div class="person-years">1732 — 1799 年</div><div class="person-origin">美国 · 弗吉尼亚</div></div></div>
+          <p class="person-body">大陆军总司令，领导独立战争击败英国。1789年当选首任总统，两届后主动退休——创立总统限任先例。他拒绝王位，坚持共和，被称为"美国国父"。</p>
+          <div class="person-impact"><strong>影响：</strong>他放弃了权力而非紧握权力——这一选择比任何军事胜利都更深刻地影响了人类政治文明。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="revolutionary">独立</span><span class="person-tag" data-cat="revolutionary">共和</span><span class="person-tag" data-cat="revolutionary">限任</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="era-divider"><div class="era-divider-line"></div><span class="era-divider-symbol">◆</span><div class="era-divider-line right"></div></div>
+
+  <!-- Era 6: 工业时代 -->
+  <section class="era" id="era6">
+    <div class="container">
+      <div class="era-header">
+        <div class="era-period">公元 1850 — 1914 年</div>
+        <h2 class="era-title">工业时代 · 蒸汽与思想的碰撞</h2>
+        <p class="era-desc">蒸汽机轰鸣，铁路跨越大陆。达尔文颠覆了人对自身的认知，马克思预言了资本主义的命运，爱因斯坦改变了时空的定义。</p>
+      </div>
+      <div class="person-grid">
+        <div class="person-card" data-cat="scientist">
+          <div class="person-header"><div class="person-avatar" data-cat="scientist">🦎</div><div class="person-name-wrap"><div class="person-name">达尔文</div><div class="person-title">进化论之父</div><div class="person-years">1809 — 1882 年</div><div class="person-origin">英格兰 ·什鲁斯伯里</div></div></div>
+          <p class="person-body">乘坐"小猎犬号"环球航行，在加拉帕戈斯群岛观察物种随环境变化。1859年发表《物种起源》，提出自然选择理论——物种并非上帝创造，而是通过变异和选择不断演化。</p>
+          <div class="person-impact"><strong>影响：</strong>进化论是现代生物学的基石，也是人类思想史上最大的范式转换之一。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="scientist">进化论</span><span class="person-tag" data-cat="scientist">生物学</span><span class="person-tag" data-cat="scientist">自然选择</span></div>
+        </div>
+        <div class="person-card" data-cat="revolutionary">
+          <div class="person-header"><div class="person-avatar" data-cat="revolutionary">📖</div><div class="person-name-wrap"><div class="person-name">马克思</div><div class="person-title">共产主义理论奠基人</div><div class="person-years">1818 — 1883 年</div><div class="person-origin">德意志 · 特里尔</div></div></div>
+          <p class="person-body">与恩格斯合著《共产党宣言》。《资本论》分析资本主义经济运行规律，揭示剩余价值来源。他的理论影响了此后一个多世纪的全球政治。</p>
+          <div class="person-quote">"哲学家们只是用不同方式解释世界，问题在于改变世界。"</div>
+          <div class="person-impact"><strong>影响：</strong>马克思主义影响了全球数十个国家的政治制度，是20世纪最具影响力的思想体系之一。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="revolutionary">阶级斗争</span><span class="person-tag" data-cat="revolutionary">资本论</span><span class="person-tag" data-cat="revolutionary">社会主义</span></div>
+        </div>
+        <div class="person-card" data-cat="scientist">
+          <div class="person-header"><div class="person-avatar" data-cat="scientist">⏳</div><div class="person-name-wrap"><div class="person-name">爱因斯坦</div><div class="person-title">相对论之父 · 物理学革命者</div><div class="person-years">1879 — 1955 年</div><div class="person-origin">德意志 · 乌尔姆</div></div></div>
+          <p class="person-body">1905年"奇迹年"发表四篇划时代论文：狭义相对论、光电效应、布朗运动和E=mc²。1915年广义相对论描述引力为时空弯曲。晚年致力于和平运动。</p>
+          <div class="person-quote">"想象力比知识更重要。"</div>
+          <div class="person-impact"><strong>影响：</strong>相对论是现代物理学两大支柱之一，GPS定位和核能都以他的理论为基础。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="scientist">相对论</span><span class="person-tag" data-cat="scientist">量子</span><span class="person-tag" data-cat="scientist">时空</span></div>
+        </div>
+        <div class="person-card" data-cat="inventor">
+          <div class="person-header"><div class="person-avatar" data-cat="inventor">💡</div><div class="person-name-wrap"><div class="person-name">爱迪生</div><div class="person-title">发明大王 · 现代电气时代开创者</div><div class="person-years">1847 — 1931 年</div><div class="person-origin">美国 · 俄亥俄州</div></div></div>
+          <p class="person-body">1093项专利——白炽灯泡、留声机、电影摄影机。他不仅发明，还创立完整商业体系——发电厂、输电网、电影公司。</p>
+          <div class="person-impact"><strong>影响：</strong>电灯让黑夜不再黑暗，电力网络成为现代城市基础设施，电影开创了大众娱乐产业。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="inventor">电气</span><span class="person-tag" data-cat="inventor">专利</span><span class="person-tag" data-cat="inventor">实用</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="era-divider"><div class="era-divider-line"></div><span class="era-divider-symbol">◆</span><div class="era-divider-line right"></div></div>
+
+  <!-- Era 7: 世界大战 -->
+  <section class="era" id="era7">
+    <div class="container">
+      <div class="era-header">
+        <div class="era-period">公元 1914 — 1945 年</div>
+        <h2 class="era-title">世界大战 · 黑暗中的抉择</h2>
+        <p class="era-desc">两次世界大战考验了人性的极限。在最黑暗的时刻，领袖的抉择决定了文明的走向。</p>
+      </div>
+      <div class="person-grid">
+        <div class="person-card" data-cat="leader">
+          <div class="person-header"><div class="person-avatar" data-cat="leader">🇬🇧</div><div class="person-name-wrap"><div class="person-name">丘吉尔</div><div class="person-title">永不投降 · 英国战时领袖</div><div class="person-years">1874 — 1965 年</div><div class="person-origin">英国 · 伦敦</div></div></div>
+          <p class="person-body">1940年法国沦陷时出任首相。伦敦大轰炸57个夜晚中，用演讲鼓舞全国——"我们将在海滩战斗，我们永不投降"。战后撰写《二战史》获诺贝尔文学奖。</p>
+          <div class="person-quote">"成功不是终点，失败也不是终结，唯有勇气才是永恒。"</div>
+          <div class="person-impact"><strong>影响：</strong>他的坚持使英国成为欧洲最后的民主堡垒。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="leader">抵抗</span><span class="person-tag" data-cat="leader">演讲</span><span class="person-tag" data-cat="leader">二战</span></div>
+        </div>
+        <div class="person-card" data-cat="leader">
+          <div class="person-header"><div class="person-avatar" data-cat="leader">🇷🇺</div><div class="person-name-wrap"><div class="person-name">列宁</div><div class="person-title">十月革命领导者</div><div class="person-years">1870 — 1924 年</div><div class="person-origin">俄罗斯 · 辛比尔斯克</div></div></div>
+          <p class="person-body">1917年领导布尔什维克推翻临时政府，建立世界上第一个社会主义国家。将马克思主义从理论变为实践，创立先锋队政党理论。但他创立的体制最终走向了专制。</p>
+          <div class="person-impact"><strong>影响：</strong>十月革命改变了20世纪政治格局，苏联的存在影响了全球走向。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="leader">革命</span><span class="person-tag" data-cat="leader">社会主义</span><span class="person-tag" data-cat="leader">苏联</span></div>
+        </div>
+        <div class="person-card" data-cat="leader">
+          <div class="person-header"><div class="person-avatar" data-cat="leader">🇺🇸</div><div class="person-name-wrap"><div class="person-name">罗斯福</div><div class="person-title">新政与二战领袖</div><div class="person-years">1882 — 1945 年</div><div class="person-origin">美国 · 纽约</div></div></div>
+          <p class="person-body">唯一连任四届的美国总统。大萧条时推行"新政"——社会保障、公共工程、金融监管。二战中领导美国成为"民主兵工厂"，推动联合国成立。</p>
+          <div class="person-impact"><strong>影响：</strong>新政奠定了美国社会福利体系基础，联合国理念出自他的构想。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="leader">新政</span><span class="person-tag" data-cat="leader">二战</span><span class="person-tag" data-cat="leader">联合国</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="era-divider"><div class="era-divider-line"></div><span class="era-divider-symbol">◆</span><div class="era-divider-line right"></div></div>
+
+  <!-- Era 8: 冷战人物 -->
+  <section class="era" id="era8">
+    <div class="container">
+      <div class="era-header">
+        <div class="era-period">公元 1945 — 1991 年</div>
+        <h2 class="era-title">冷战人物 · 核阴影下的博弈</h2>
+        <p class="era-desc">核武器让战争不可承受，但意识形态对抗从未停止。有人筑起铁幕，有人推倒围墙；有人选择暴力，有人选择和平。</p>
+      </div>
+      <div class="person-grid">
+        <div class="person-card" data-cat="revolutionary">
+          <div class="person-header"><div class="person-avatar" data-cat="revolutionary">🕊️</div><div class="person-name-wrap"><div class="person-name">甘地</div><div class="person-title">非暴力抵抗之父</div><div class="person-years">1869 — 1948 年</div><div class="person-origin">印度 · 波尔班达尔</div></div></div>
+          <p class="person-body">以"非暴力不合作"运动领导印度独立。组织盐税抗议、抵制英货、全民罢工——不用一枪一弹迫使大英帝国退出印度。马丁·路德·金、曼德拉都深受其启发。1948年被宗教极端分子刺杀。</p>
+          <div class="person-quote">"你必须成为你希望在世界上看到的改变。"</div>
+          <div class="person-impact"><strong>影响：</strong>证明非暴力可以战胜武装暴力，影响了全球数十个国家的自由和民权运动。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="revolutionary">非暴力</span><span class="person-tag" data-cat="revolutionary">独立</span><span class="person-tag" data-cat="revolutionary">和平</span></div>
+        </div>
+        <div class="person-card" data-cat="leader">
+          <div class="person-header"><div class="person-avatar" data-cat="leader">🇩🇪</div><div class="person-name-wrap"><div class="person-name">马丁·路德·金</div><div class="person-title">民权运动领袖</div><div class="person-years">1929 — 1968 年</div><div class="person-origin">美国 · 亚特兰大</div></div></div>
+          <p class="person-body">1963年发表《我有一个梦想》演讲——20世纪最伟大的演讲之一。采用甘地非暴力策略，推动《民权法案》和《投票权法案》通过。1968年被刺杀，年仅39岁。</p>
+          <div class="person-quote">"黑暗不能驱走黑暗，只有光明才能做到。"</div>
+          <div class="person-impact"><strong>影响：</strong>结束了美国种族隔离制度，非暴力抗议模式影响了全球民主运动。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="leader">民权</span><span class="person-tag" data-cat="leader">非暴力</span><span class="person-tag" data-cat="leader">平等</span></div>
+        </div>
+        <div class="person-card" data-cat="leader">
+          <div class="person-header"><div class="person-avatar" data-cat="leader">🇿🇦</div><div class="person-name-wrap"><div class="person-name">曼德拉</div><div class="person-title">南非自由之光</div><div class="person-years">1918 — 2013 年</div><div class="person-origin">南非 · 特兰斯凯</div></div></div>
+          <p class="person-body">反抗种族隔离制度，1962年被判终身监禁。27年牢狱后1990年获释，1994年当选南非首位黑人总统。他没有报复，而是推行和解——成立"真相与和解委员会"。从囚徒到总统的政治奇迹。</p>
+          <div class="person-quote">"教育是改变世界最强有力的武器。"</div>
+          <div class="person-impact"><strong>影响：</strong>南非和平转型避免了种族战争，和解模式成为后冲突社会的参照。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="leader">和解</span><span class="person-tag" data-cat="leader">自由</span><span class="person-tag" data-cat="leader">南非</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="era-divider"><div class="era-divider-line"></div><span class="era-divider-symbol">◆</span><div class="era-divider-line right"></div></div>
+
+  <!-- Era 9: 当代先锋 -->
+  <section class="era" id="era9">
+    <div class="container">
+      <div class="era-header">
+        <div class="era-period">公元 1991 年 — 至今</div>
+        <h2 class="era-title">当代先锋 · 数字时代的塑造者</h2>
+        <p class="era-desc">互联网将世界缩小为一个屏幕，AI正在重新定义人类的边界。这一代的先锋不再征服疆土——他们在征服未知的技术领域。</p>
+      </div>
+      <div class="person-grid">
+        <div class="person-card" data-cat="inventor">
+          <div class="person-header"><div class="person-avatar" data-cat="inventor">📱</div><div class="person-name-wrap"><div class="person-name">史蒂夫·乔布斯</div><div class="person-title">苹果创始人 · 移动互联网革命者</div><div class="person-years">1955 — 2011 年</div><div class="person-origin">美国 · 加利福尼亚硅谷</div></div></div>
+          <p class="person-body">1976年在车库创立苹果，1984年推出Macintosh。被公司驱逐后创立NeXT和Pixar。1997年回归，2007年发布iPhone——重新定义了手机，开启移动互联网时代。</p>
+          <div class="person-quote">"求知若饥，虚心若愚。"</div>
+          <div class="person-impact"><strong>影响：</strong>智能手机成为人类器官的延伸，全球35亿人使用智能手机。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="inventor">iPhone</span><span class="person-tag" data-cat="inventor">设计</span><span class="person-tag" data-cat="inventor">移动互联网</span></div>
+        </div>
+        <div class="person-card" data-cat="scientist">
+          <div class="person-header"><div class="person-avatar" data-cat="scientist">🌐</div><div class="person-name-wrap"><div class="person-name">蒂姆·伯纳斯-李</div><div class="person-title">万维网发明者</div><div class="person-years">1955 年 — 至今</div><div class="person-origin">英国 · 伦敦</div></div></div>
+          <p class="person-body">1989年发明万维网（WWW）——HTML、URL和HTTP。将代码无偿开放，拒绝商业化和专利。从此信息传播的壁垒被彻底打破，人类进入信息时代。</p>
+          <div class="person-impact"><strong>影响：</strong>万维网让全球50亿人能够即时获取信息——这是人类历史上最大规模的信息革命。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="scientist">万维网</span><span class="person-tag" data-cat="scientist">开放</span><span class="person-tag" data-cat="scientist">互联网</span></div>
+        </div>
+        <div class="person-card" data-cat="inventor">
+          <div class="person-header"><div class="person-avatar" data-cat="inventor">🚀</div><div class="person-name-wrap"><div class="person-name">埃隆·马斯克</div><div class="person-title">SpaceX创始人 · 多领域颠覆者</div><div class="person-years">1971 年 — 至今</div><div class="person-origin">南非 · 比勒陀利亚（后移民美国）</div></div></div>
+          <p class="person-body">创立SpaceX实现火箭回收——发射成本降低90%，目标是火星殖民。创办特斯拉推动电动车革命。Neuralink探索脑机接口，Starlink提供全球卫星互联网。</p>
+          <div class="person-impact"><strong>影响：</strong>太空不再是政府专属，电动车从边缘走向主流，火星殖民时间表被缩短到可见的未来。</div>
+          <div class="person-tags"><span class="person-tag" data-cat="inventor">太空</span><span class="person-tag" data-cat="inventor">电动车</span><span class="person-tag" data-cat="inventor">火星</span></div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-num">50+</div><div class="stat-label">改变世界的人物</div></div>
+        <div class="stat-box"><div class="stat-num">9</div><div class="stat-label">人物类型</div></div>
+        <div class="stat-box"><div class="stat-num">2500+</div><div class="stat-label">年跨越的历史</div></div>
+        <div class="stat-box"><div class="stat-num">∞</div><div class="stat-label">影响延续至今</div></div>
+      </div>
+
+      <div class="quote-block"><p class="quote-text">"每一个改变世界的人，都曾在某个瞬间做出选择——<br>是顺应潮流，还是逆流而上。历史记住的，永远是那些逆流的人。"</p><p class="quote-author">—— 致每一个读到这里的你</p></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <h3 class="footer-title">历史人物长卷</h3>
+      <p class="footer-text">从孔子到乔布斯，从苏格拉底到马斯克——这些人改变了世界的形状。他们并非天生伟大，而是在某个历史节点上，做出了非凡的选择。</p>
+      <p class="footer-quote">"以人为镜，可以明得失。" —— 唐太宗</p>
+      <div class="footer-bottom"><span>© 2026 历史人物长卷 · AI协助生成 · 内容仅供学习参考</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.person-card').forEach(card => observer.observe(card));
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => { const scrollTop = window.pageYOffset || document.documentElement.scrollTop; const scrollHeight = document.documentElement.scrollHeight - window.innerHeight; progressBar.style.width = (scrollTop / scrollHeight * 100) + '%'; });
+    const navLinks = document.querySelectorAll('.timeline-nav a');
+    const sections = document.querySelectorAll('.era');
+    const navObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { const id = entry.target.getAttribute('id'); navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === '#' + id) { link.classList.add('active'); link.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); } }); } }); }, { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' });
+    sections.forEach(section => navObserver.observe(section));
+  </script>
+</body>
+</html>

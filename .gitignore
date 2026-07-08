@@ -1,0 +1,13 @@
+# WorkBuddy internal folder
+.workbuddy/
+
+# Temp scripts
+images/download.ps1
+images/retry.ps1
+images/download_all.ps1
+images/gen_svg.ps1
+
+# System files
+Thumbs.db
+.DS_Store
+Desktop.ini
