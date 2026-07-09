@@ -3424,6 +3424,18 @@
     });
 
     detailPanel.classList.add('open');
+
+    // Scroll to the active era section after panel animation
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        const dpContent = document.querySelector('#detail-panel .dp-content');
+        const activeSec = dpContent.querySelector('.dp-era-section.active');
+        if (dpContent && activeSec) {
+          const offset = activeSec.offsetTop - dpContent.clientHeight * 0.3;
+          dpContent.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
+        }
+      }, 100);
+    });
   }
 
   function closeDetailPanel() {
@@ -3449,10 +3461,12 @@
       section.className = 'dp-era-section ' + (idx === eraIndex ? 'active' : 'inactive');
     });
 
-    // Scroll active section into view
-    const activeSection = document.querySelector('.dp-era-section.active');
-    if (activeSection) {
-      activeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Scroll active section into view (use scroll container for precise alignment)
+    const dpContent = document.querySelector('#detail-panel .dp-content');
+    const activeSection = dpContent.querySelector('.dp-era-section.active');
+    if (dpContent && activeSection) {
+      const offset = activeSection.offsetTop - dpContent.clientHeight * 0.3;
+      dpContent.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
     }
 
     // Update era nav active state (also update text for language)
