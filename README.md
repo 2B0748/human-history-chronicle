@@ -12,7 +12,7 @@
 | 🌍 **3D 地球 / 3D Globe** | Three.js 渲染，程序化 4096px 高清纹理 / Procedural HD texture |
 | 📍 **23 个历史地标 / 23 Landmarks** | 覆盖六大洲 / Covering 6 continents |
 | ⏳ **10 个时代 / 10 Eras** | 史前→古文明→古典→中世纪→大航海→启蒙→帝国主义→世界大战→冷战→数字时代 / Prehistory through Digital Age |
-| 👤 **80+ 历史人物 / 80+ Figures** | 每人含画像、头衔、详细介绍 / Portrait, title & biography for each |
+| 👤 **113 位历史人物 / 113 Figures** | 每人含画像、头衔、详细介绍，63 张真实画像 / Portrait, title & biography for each, 63 real portraits |
 | 🖼️ **109 张史料图片 / 109 Historical Images** | 来自 Wikipedia 的真实照片 / Real photos from Wikipedia |
 | 🌐 **中英双语 / Bilingual CN/EN** | 一键切换，自动检测浏览器语言 / One-click toggle, auto-detects browser language |
 | 📱 **移动端适配 / Mobile Ready** | 响应式布局，自动降级球体分辨率 / Responsive, auto quality reduction |
@@ -44,7 +44,7 @@ python -m http.server 8080
 human-history-chronicle/
 ├── earth-history.html      # 3D 交互式地球浏览器 / 3D Globe Browser (3800+ lines)
 ├── images/
-│   ├── people/             # 54 张历史人物画像 / 54 historical figure portraits
+│   ├── people/             # 101 张历史人物画像 / 101 historical figure portraits
 │   └── real/               # 109 张历史场景照片 / 109 historical scene photos
 ├── README.md               # 项目介绍（中英双语） / Project overview (bilingual)
 └── .gitignore
@@ -62,7 +62,7 @@ human-history-chronicle/
 | 📍 **23 个历史地标 / 23 Landmarks** | 东非大裂谷 · 美索不达米亚 · 尼罗河 · 黄河流域 · 雅典 · 罗马 · 中美洲 · 吴哥 · 西非 · 朝鲜 · 大洋洲 等 / East African Rift, Mesopotamia, Nile, Yellow River, Athens, Rome, Mesoamerica, Angkor, West Africa, Korea, Oceania & more |
 | ⏳ **10 个时代 / 10 Eras** | 史前→古文明→古典→中世纪→大航海→启蒙→帝国主义→世界大战→冷战→数字时代 / Prehistory → Ancient → Classical → Medieval → Discovery → Enlightenment → Imperialism → World Wars → Cold War → Digital Age |
 | 🖱️ **交互操作 / Interaction** | 拖拽旋转地球 · 滚轮缩放 · 悬停预览 · 点击查看详细历史 / Drag to rotate · Scroll to zoom · Hover to preview · Click for details |
-| 👤 **80+ 历史人物 / 80+ Figures** | 孔子 · 凯撒 · 拿破仑 · 莎士比亚 · 牛顿 · 成吉思汗 · 曼萨·穆萨 · 世宗大王 · 华盛顿 · 爱因斯坦 · 乔布斯 / Confucius, Caesar, Napoleon, Shakespeare, Newton, Genghis Khan, Mansa Musa, Sejong, Washington, Einstein, Jobs & more |
+| 👤 **113 位历史人物 / 113 Figures** | 孔子 · 凯撒 · 拿破仑 · 莎士比亚 · 牛顿 · 成吉思汗 · 曼萨·穆萨 · 世宗大王 · 华盛顿 · 爱因斯坦 · 乔布斯 · 甘地 · 列宁 · 屋大维 · 紫式部 · 李舜臣 / Confucius, Caesar, Napoleon, Shakespeare, Newton, Genghis Khan, Mansa Musa, Sejong, Washington, Einstein, Jobs, Gandhi, Lenin, Augustus, Murasaki, Yi Sun-sin & more |
 | 🖼️ **灯箱浏览 / Lightbox** | 点击图片全屏放大，键盘 ← → 翻页，支持缩放 / Click to enlarge, arrow keys to navigate, zoom support |
 | 🌐 **中英双语 / Bilingual** | 界面、时代、地名、历史、人物全部中英双语，自动检测浏览器语言，localStorage 记忆偏好 / Full CN/EN for UI, eras, locations, history, and figures. Auto-detects browser language with localStorage persistence |
 | 🎨 **毛玻璃 UI / Glass UI** | Apple 风格毛玻璃面板，backdrop-filter 模糊，入场动画，地球脉冲效果 / Frosted glass panels with backdrop-filter blur, entrance animations, earth pulse effects |
@@ -77,7 +77,7 @@ human-history-chronicle/
 | **Three.js** (r128) | 3D 地球渲染 / 3D globe rendering，5 层 CDN 容灾 / 5-tier CDN fallback |
 | **Canvas API** | 4096px 程序化地球纹理（大陆/海洋/山脉/沙漠/冰盖/像素噪声）/ Procedural texture generation |
 | **Vanilla JS** | 零框架，纯原生 JavaScript / Zero frameworks, pure vanilla JS |
-| **Wikipedia REST API** | 自动下载真实历史图片（93/109 成功）/ Auto-download historical photos |
+| **Wikipedia & Commons** | 自动下载真实历史图片（210 张 / 93% 成功率）/ Auto-download historical photos (210 images, 93% success) |
 | **CSS Glass UI** | backdrop-filter 毛玻璃 + cubic-bezier 缓动动画 / Frosted glass with custom easing |
 | **Intersection Observer** | 高性能可见性检测 / High-performance visibility detection |
 
@@ -112,7 +112,7 @@ human-history-chronicle/
 | 冷战格局 | Cold War | 1945 — 1991 |
 | 数字时代 | Digital Age | 1991 — Present |
 
-### 历史人物 / Historical Figures (80+)
+### 历史人物 / Historical Figures (113)
 
 孔子 / Confucius · 秦始皇 / Qin Shi Huang · 凯撒 / Caesar · 拿破仑 / Napoleon · 莎士比亚 / Shakespeare · 牛顿 / Newton · 成吉思汗 / Genghis Khan · 哥伦布 / Columbus · 曼萨·穆萨 / Mansa Musa · 世宗大王 / Sejong the Great · 华盛顿 / Washington · 爱因斯坦 / Einstein · 乔布斯 / Jobs ......
 
