@@ -3522,7 +3522,7 @@
     for (let i = 0; i < eras.length; i++) {
       const label = document.createElement('div');
       label.className = 'tl-label' + (i === 0 ? ' active' : '');
-      label.textContent = eras[i].short;
+      label.textContent = currentLang === 'zh' ? eras[i].short : eras[i].shortEn;
       label.dataset.index = i;
       label.addEventListener('click', () => setCurrentEra(i));
       labelsContainer.appendChild(label);
